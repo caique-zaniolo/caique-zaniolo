@@ -3,42 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RainPower - Inteligencia para o Mercado de Energia</title>
-<meta name="description" content="RainPower - Transformando dados climaticos em vantagem competitiva no mercado de energia brasileiro.">
+<title>RainPower - Inteligência para o Mercado de Energia</title>
+<meta name="description" content="RainPower - Transformando dados climáticos em vantagem competitiva no mercado de energia brasileiro.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 25'%3E%3Cpath d='M6.84 11.83c-.43.23-.87.26-1.31.1-.45-.16-.79-.45-1.01-.88L.2 2.51c-.23-.43-.27-.86-.11-1.3C.25.77.55.43.98.2c.43-.23.87-.26 1.31-.1.45.16.79.45 1.01.88l4.31 8.55c.23.43.27.86.11 1.3-.16.44-.45.78-.88 1zm6.04 11.97c-.43.23-.87.26-1.31.1-.45-.16-.79-.45-1.01-.88l-3.45-6.84c-.23-.43-.27-.86-.11-1.3.16-.44.45-.78.88-1 .43-.23.87-.26 1.31-.1.45.16.79.45 1.01.88l3.45 6.84c.23.43.27.86.11 1.3-.16.44-.45.78-.88 1z' fill='%2313C2C2'/%3E%3C/svg%3E">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#0a0e12;color:#e8eaed;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#0a0e12;color:#e8eaed;min-height:100vh;overflow-x:hidden}
 a{color:#13C2C2;text-decoration:none;transition:opacity .2s}
 a:hover{opacity:.8}
 
 /* Header */
-.header{border-bottom:1px solid #1e2429;padding:1.5rem 2rem}
+.header{border-bottom:1px solid #1e2429;padding:1.5rem 2rem;position:sticky;top:0;background:#0a0e12ee;backdrop-filter:blur(12px);z-index:100}
 .header-inner{max-width:72rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .logo-svg{height:2rem;width:auto}
 .lang-toggle{display:flex;gap:.25rem;background:#151a21;border:1px solid #2d3748;border-radius:9999px;padding:.2rem}
 .lang-btn{padding:.35rem .75rem;border-radius:9999px;border:none;background:transparent;color:#9ca3af;cursor:pointer;font-size:.8rem;font-weight:500;transition:all .2s}
 .lang-btn.active{background:#13C2C2;color:#0a0e12}
 
-/* Hero */
-.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(19,194,194,.06) 0%,transparent 70%);pointer-events:none}
-.hero-badge{display:inline-block;padding:.4rem 1rem;border:1px solid #2d3748;border-radius:9999px;font-size:.75rem;color:#13C2C2;letter-spacing:.05em;text-transform:uppercase;margin-bottom:2rem}
-.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.15;max-width:48rem;margin-bottom:1.5rem}
-.hero h1 .accent{color:#13C2C2}
-.hero p{font-size:clamp(1rem,2vw,1.25rem);color:#9ca3af;max-width:52rem;line-height:1.7;margin-bottom:3rem;text-wrap: balance}
+/* Sections */
+.section{max-width:72rem;margin:0 auto;padding:5rem 2rem}
+.section-label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#13C2C2;margin-bottom:1rem;font-weight:600}
+.section-title{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;line-height:1.25;margin-bottom:1rem;max-width:40rem}
+.section-desc{font-size:1.05rem;color:#9ca3af;line-height:1.7;max-width:40rem;margin-bottom:2.5rem}
 
-/* Features */
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.5rem;max-width:52rem;width:100%;margin-bottom:3rem}
-.feature{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:1.75rem;text-align:left;transition:border-color .3s}
-.feature:hover{border-color:#2d3748}
-.feature-icon{width:2.5rem;height:2.5rem;border-radius:.5rem;background:rgba(19,194,194,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:#13C2C2}
-.feature h3{font-size:1rem;font-weight:600;margin-bottom:.5rem}
-.feature p{font-size:.875rem;color:#6b7280;line-height:1.6}
+/* Hero */
+.hero{text-align:center;padding:6rem 2rem 4rem;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(19,194,194,.07) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(2.2rem,5vw,3.75rem);font-weight:700;line-height:1.12;max-width:52rem;margin:0 auto 1.75rem}
+.hero h1 .accent{color:#13C2C2}
+.hero p{font-size:clamp(1.05rem,2vw,1.3rem);color:#9ca3af;max-width:44rem;line-height:1.7;margin:0 auto 3rem;text-wrap:balance}
+
+/* Stat badges */
+.stat-badges{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.stat-badge{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:1.25rem 1.75rem;text-align:center;min-width:12rem}
+.stat-badge .num{font-size:2rem;font-weight:700;color:#13C2C2;display:block;line-height:1.2}
+.stat-badge .label{font-size:.8rem;color:#6b7280;margin-top:.35rem;display:block}
+
+/* Chart containers */
+.chart-wrap{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:1.5rem;margin-top:1.5rem;position:relative}
+.chart-wrap canvas{max-height:360px}
+
+/* Split layout */
+.split{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center}
+.split.reverse{grid-template-columns:1.2fr 1fr}
+
+/* Drought section */
+.drought-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.drought-card{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:1.75rem;text-align:center;transition:border-color .3s}
+.drought-card:hover{border-color:#2d3748}
+.drought-card .regime{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;font-weight:600}
+.drought-card .regime.wet{color:#64D8CB}
+.drought-card .regime.normal{color:#E6AA68}
+.drought-card .regime.dry{color:#D4726A}
+.drought-card .price{font-size:2.25rem;font-weight:700;line-height:1.2}
+.drought-card .price.wet{color:#64D8CB}
+.drought-card .price.normal{color:#E6AA68}
+.drought-card .price.dry{color:#D4726A}
+.drought-card .unit{font-size:.8rem;color:#6b7280;margin-top:.25rem}
+.drought-card .detail{font-size:.85rem;color:#6b7280;margin-top:.75rem;line-height:1.5}
+
+/* Metrics row */
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.metric-card{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:1.5rem;text-align:center}
+.metric-card .val{font-size:1.75rem;font-weight:700;color:#13C2C2}
+.metric-card .met-label{font-size:.85rem;color:#6b7280;margin-top:.25rem}
+
+/* Audience cards */
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+.audience-card{background:#151a21;border:1px solid #1e2429;border-radius:.75rem;padding:2rem;transition:border-color .3s}
+.audience-card:hover{border-color:#13C2C2}
+.audience-card .card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.audience-card .card-icon{width:3.5rem;height:3.5rem;min-width:3.5rem;border-radius:.5rem;background:rgba(19,194,194,.1);display:flex;align-items:center;justify-content:center;color:#13C2C2}
+.audience-card h3{font-size:1.25rem;font-weight:600;line-height:1.3;text-wrap:balance}
+.audience-card ul{list-style:none;padding:0}
+.audience-card li{font-size:.9rem;color:#9ca3af;line-height:1.7;padding-left:1.25rem;position:relative;margin-bottom:.35rem}
+.audience-card li::before{content:'';position:absolute;left:0;top:.55rem;width:6px;height:6px;border-radius:50%;background:#13C2C2}
 
 /* CTA */
-.cta-section{text-align:center;margin-bottom:1rem}
-.cta-btn{display:inline-block;padding:.85rem 2.25rem;background:#13C2C2;color:#0a0e12;font-weight:600;font-size:1rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .2s;letter-spacing:.01em}
+.cta-section{text-align:center;padding:4rem 2rem 5rem}
+.cta-section h2{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;margin-bottom:1rem}
+.cta-btn{display:inline-block;padding:.85rem 2.5rem;background:#13C2C2;color:#0a0e12;font-weight:600;font-size:1rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .2s;letter-spacing:.01em}
 .cta-btn:hover{background:#0ea5a5;opacity:1}
 .cta-note{font-size:.8rem;color:#6b7280;margin-top:.75rem}
 
@@ -47,14 +92,22 @@ a:hover{opacity:.8}
 .footer p{font-size:.8rem;color:#6b7280}
 .footer a{color:#9ca3af}
 
-/* Animated dots background */
-.bg-dots{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.15;background-image:radial-gradient(#2d3748 1px,transparent 1px);background-size:32px 32px}
+/* Divider */
+.divider{border:none;border-top:1px solid #1e2429;max-width:72rem;margin:0 auto}
 
-@media(max-width:640px){
+/* Background dots */
+.bg-dots{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.12;background-image:radial-gradient(#2d3748 1px,transparent 1px);background-size:32px 32px}
+
+@media(max-width:768px){
   .header{padding:1rem}
-  .hero{padding:3rem 1.25rem}
-  .features{grid-template-columns:1fr;gap:1rem}
-  .feature{padding:1.25rem}
+  .section{padding:3rem 1.25rem}
+  .hero{padding:4rem 1.25rem 3rem}
+  .split,.split.reverse{grid-template-columns:1fr}
+  .drought-grid{grid-template-columns:1fr}
+  .metrics-row{grid-template-columns:1fr}
+  .audience-grid{grid-template-columns:1fr}
+  .stat-badges{flex-direction:column;align-items:center}
+  .stat-badge{width:100%;max-width:20rem}
 }
 </style>
 </head>
@@ -75,70 +128,402 @@ a:hover{opacity:.8}
   </div>
 </header>
 
-<main class="hero">
-  <span class="hero-badge" data-pt="Em breve" data-en="Coming soon">Em breve</span>
-
+<!-- HERO -->
+<section class="hero">
   <h1>
-    <span data-pt="Transformando clima em" data-en="Turning climate into">Transformando clima em</span>
-    <span class="accent" data-pt=" vantagem competitiva" data-en=" competitive advantage"> vantagem competitiva</span>
+    <span data-pt="No Brasil, quem entende a" data-en="In Brazil, whoever understands">No Brasil, quem entende a</span>
+    <span class="accent" data-pt=" chuva" data-en=" rainfall"> chuva</span>
+    <span data-pt=" entende o" data-en=" understands the"> entende o</span>
+    <span class="accent" data-pt=" preço da energia" data-en=" price of energy"> preço da energia</span>
   </h1>
-
-  <p data-pt="Estamos construindo a plataforma que vai transformar a forma como o mercado de energia brasileiro toma decisoes. Dados climaticos, modelos preditivos e inteligencia acionavel, tudo em um so lugar."
-     data-en="We are building the platform that will transform how the Brazilian energy market makes decisions. Climate data, predictive models, and actionable intelligence, all in one place.">
-    Estamos construindo a plataforma que vai transformar a forma como o mercado de energia brasileiro toma decisoes. Dados climaticos, modelos preditivos e inteligencia acionavel, tudo em um so lugar.
+  <p data-pt="65% da eletricidade brasileira vem de hidrelétricas. Quando chove menos, os reservatórios esvaziam e o preço da energia dispara. O RainPower transforma dados climáticos em previsões acionáveis para o mercado de energia."
+     data-en="65% of Brazil's electricity comes from hydropower. When it rains less, reservoirs drain and energy prices spike. RainPower turns climate data into actionable forecasts for the energy market.">
+    65% da eletricidade brasileira vem de hidrelétricas. Quando chove menos, os reservatórios esvaziam e o preço da energia dispara. O RainPower transforma dados climáticos em previsões acionáveis para o mercado de energia.
   </p>
 
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6l3-3"/><path d="M12 8l-3-3"/><path d="M20 16.2A4.5 4.5 0 0017.5 8h-1.8A7 7 0 104 14.9"/><path d="M16 16l-4 4-4-4"/></svg>
-      </div>
-      <h3 data-pt="Dados climaticos" data-en="Climate data">Dados climaticos</h3>
-      <p data-pt="Monitoramento de precipitacao via satelite nas bacias hidrograficas que movem o setor eletrico."
-         data-en="Satellite-based precipitation monitoring across the watersheds that power Brazil's electric grid.">
-        Monitoramento de precipitacao via satelite nas bacias hidrograficas que movem o setor eletrico.
-      </p>
+  <div class="stat-badges">
+    <div class="stat-badge">
+      <span class="num">65%</span>
+      <span class="label" data-pt="da matriz elétrica é hidráulica" data-en="of power grid is hydroelectric">da matriz elétrica é hidráulica</span>
     </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
-      <h3 data-pt="Modelos preditivos" data-en="Predictive models">Modelos preditivos</h3>
-      <p data-pt="Algoritmos que conectam padroes climaticos ao preco de energia para antecipar movimentos do mercado."
-         data-en="Algorithms connecting climate patterns to energy prices, anticipating market movements.">
-        Algoritmos que conectam padroes climaticos ao preco de energia para antecipar movimentos do mercado.
-      </p>
+    <div class="stat-badge">
+      <span class="num">10x</span>
+      <span class="label" data-pt="variação de preço em crises hídricas" data-en="price variation during water crises">variação de preço em crises hídricas</span>
     </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </div>
-      <h3 data-pt="Decisoes em tempo real" data-en="Real-time decisions">Decisoes em tempo real</h3>
-      <p data-pt="Inteligencia acionavel para comercializadores, geradores e consumidores livres de energia."
-         data-en="Actionable intelligence for energy traders, generators, and free-market consumers.">
-        Inteligencia acionavel para comercializadores, geradores e consumidores livres de energia.
-      </p>
+    <div class="stat-badge">
+      <span class="num">R$100bi</span>
+      <span class="label" data-pt="mercado livre de energia/ano" data-en="free energy market per year">mercado livre de energia/ano</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 1: Rainfall vs Price correlation -->
+<section class="section">
+  <div class="split">
+    <div>
+      <span class="section-label" data-pt="A correlação" data-en="The correlation">A correlação</span>
+      <h2 class="section-title" data-pt="Menos chuva, mais caro. A relação é direta." data-en="Less rain, higher prices. The relationship is direct.">Menos chuva, mais caro. A relação é direta.</h2>
+      <p class="section-desc" data-pt="O gráfico ao lado mostra dados reais: quando a precipitação cai nas bacias hidrográficas do Sudeste, o PLD (preço de liquidação) sobe. Na crise hídrica de 2021, o preço saltou de R$60 para mais de R$500/MWh." data-en="The chart shows real data: when rainfall drops in the Southeast watersheds, the PLD (settlement price) rises. During the 2021 water crisis, prices jumped from R$60 to over R$500/MWh.">O gráfico ao lado mostra dados reais: quando a precipitação cai nas bacias hidrográficas do Sudeste, o PLD (preço de liquidação) sobe. Na crise hídrica de 2021, o preço saltou de R$60 para mais de R$500/MWh.</p>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="correlationChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 2: The drought effect -->
+<section class="section">
+  <div style="text-align:center;max-width:48rem;margin:0 auto">
+    <span class="section-label" data-pt="O impacto econômico" data-en="The economic impact">O impacto econômico</span>
+    <h2 class="section-title" style="max-width:100%" data-pt="Secas transformam o mercado de energia" data-en="Droughts transform the energy market">Secas transformam o mercado de energia</h2>
+    <p class="section-desc" style="max-width:100%" data-pt="O preço médio da energia varia drasticamente dependendo do regime hidrológico. Quem antecipa esses movimentos ganha vantagem competitiva." data-en="Average energy prices vary drastically depending on hydrological conditions. Those who anticipate these movements gain competitive advantage.">O preço médio da energia varia drasticamente dependendo do regime hidrológico. Quem antecipa esses movimentos ganha vantagem competitiva.</p>
+  </div>
+
+  <div class="drought-grid">
+    <div class="drought-card">
+      <div class="regime wet" data-pt="Período úmido" data-en="Wet period">Período úmido</div>
+      <div class="price wet">~R$60</div>
+      <div class="unit">BRL/MWh</div>
+      <div class="detail" data-pt="Reservatórios cheios, oferta abundante. Preços no piso." data-en="Full reservoirs, abundant supply. Prices at floor level.">Reservatórios cheios, oferta abundante. Preços no piso.</div>
+    </div>
+    <div class="drought-card">
+      <div class="regime normal" data-pt="Período normal" data-en="Normal period">Período normal</div>
+      <div class="price normal">~R$150</div>
+      <div class="unit">BRL/MWh</div>
+      <div class="detail" data-pt="Condições médias. Preço reflete o equilíbrio oferta-demanda." data-en="Average conditions. Price reflects supply-demand balance.">Condições médias. Preço reflete o equilíbrio oferta-demanda.</div>
+    </div>
+    <div class="drought-card">
+      <div class="regime dry" data-pt="Seca severa" data-en="Severe drought">Seca severa</div>
+      <div class="price dry">~R$550</div>
+      <div class="unit">BRL/MWh</div>
+      <div class="detail" data-pt="Térmicas acionadas, risco de racionamento. Preços disparam." data-en="Thermal plants activated, rationing risk. Prices skyrocket.">Térmicas acionadas, risco de racionamento. Preços disparam.</div>
     </div>
   </div>
 
-  <div class="cta-section">
-    <a href="mailto:contato@rainpower.com.br" class="cta-btn" data-pt="Saiba mais" data-en="Learn more">Saiba mais</a>
-    <p class="cta-note" data-pt="Entre em contato para acesso antecipado" data-en="Get in touch for early access">Entre em contato para acesso antecipado</p>
+  <div class="chart-wrap" style="max-width:48rem;margin:2.5rem auto 0">
+    <canvas id="droughtChart"></canvas>
   </div>
-</main>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 3: Predictive edge -->
+<section class="section">
+  <div class="split reverse">
+    <div class="chart-wrap">
+      <canvas id="predictionChart"></canvas>
+    </div>
+    <div>
+      <span class="section-label" data-pt="Nosso diferencial" data-en="Our edge">Nosso diferencial</span>
+      <h2 class="section-title" data-pt="Modelos que antecipam o mercado" data-en="Models that anticipate the market">Modelos que antecipam o mercado</h2>
+      <p class="section-desc" data-pt="Combinamos dados de satélite (CHIRPS), níveis de reservatório (ONS), índices climáticos (ENSO) e machine learning para prever o preço semanal da energia com alta precisão." data-en="We combine satellite data (CHIRPS), reservoir levels (ONS), climate indices (ENSO) and machine learning to predict weekly energy prices with high accuracy.">Combinamos dados de satélite (CHIRPS), níveis de reservatório (ONS), índices climáticos (ENSO) e machine learning para prever o preço semanal da energia com alta precisão.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 4: Who benefits -->
+<section class="section">
+  <div style="text-align:center;max-width:48rem;margin:0 auto">
+    <span class="section-label" data-pt="Para quem" data-en="For whom">Para quem</span>
+    <h2 class="section-title" style="max-width:100%" data-pt="Inteligência para quem decide no mercado de energia" data-en="Intelligence for energy market decision-makers">Inteligência para quem decide no mercado de energia</h2>
+  </div>
+
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 data-pt="Comercializadores e Consumidores Livres" data-en="Traders and Free-Market Consumers">Comercializadores e Consumidores Livres</h3>
+      </div>
+      <ul>
+        <li data-pt="Antecipe movimentos de preço com semanas de antecedência" data-en="Anticipate price movements weeks in advance">Antecipe movimentos de preço com semanas de antecedência</li>
+        <li data-pt="Otimize contratos de compra e venda de energia" data-en="Optimize energy purchase and sale contracts">Otimize contratos de compra e venda de energia</li>
+        <li data-pt="Reduza exposição ao mercado spot com dados fundamentalistas" data-en="Reduce spot market exposure with fundamental data">Reduza exposição ao mercado spot com dados fundamentalistas</li>
+        <li data-pt="Cobertura completa dos 4 subsistemas do SIN" data-en="Full coverage of all 4 SIN subsystems">Cobertura completa dos 4 subsistemas do SIN</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3 data-pt="Investidores e Fundos" data-en="Investors and Funds">Investidores e Fundos</h3>
+      </div>
+      <ul>
+        <li data-pt="Mercado de energia brasileira com R$100bi+ em transações anuais" data-en="Brazilian energy market with R$100bi+ in annual transactions">Mercado de energia brasileira com R$100bi+ em transações anuais</li>
+        <li data-pt="Dados proprietários com vantagem de primeiro movimento" data-en="Proprietary data with first-mover advantage">Dados proprietários com vantagem de primeiro movimento</li>
+        <li data-pt="Modelo escalável para outros mercados dependentes de hidrologia" data-en="Scalable model for other hydrology-dependent markets">Modelo escalável para outros mercados dependentes de hidrologia</li>
+        <li data-pt="Equipe técnica com expertise em dados climáticos e mercado de energia" data-en="Technical team with climate data and energy market expertise">Equipe técnica com expertise em dados climáticos e mercado de energia</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 data-pt="Quer saber mais?" data-en="Want to learn more?">Quer saber mais?</h2>
+  <p class="section-desc" style="max-width:36rem;margin:0 auto 2rem;text-align:center" data-pt="Estamos em fase de acesso antecipado. Entre em contato para uma demonstração." data-en="We are in early access phase. Get in touch for a demonstration.">Estamos em fase de acesso antecipado. Entre em contato para uma demonstração.</p>
+  <a href="mailto:contato@rainpower.com.br" class="cta-btn" data-pt="Entre em contato" data-en="Get in touch">Entre em contato</a>
+  <p class="cta-note" data-pt="contato@rainpower.com.br" data-en="contato@rainpower.com.br">contato@rainpower.com.br</p>
+</section>
 
 <footer class="footer">
   <p>&copy; 2026 RainPower. <span data-pt="Todos os direitos reservados." data-en="All rights reserved.">Todos os direitos reservados.</span></p>
 </footer>
 
 <script>
+// -- Language toggle --
+let currentLang = 'pt';
 function setLang(lang) {
+  currentLang = lang;
   document.querySelectorAll('[data-pt]').forEach(function(el) {
     el.innerHTML = el.getAttribute('data-' + lang);
   });
   document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+  updateChartLabels(lang);
+}
+
+// -- Chart defaults --
+Chart.defaults.color = '#9ca3af';
+Chart.defaults.borderColor = '#1e2429';
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif";
+
+// -- Chart 1: Correlation (Rainfall vs Price, half-yearly from 2020-2025) --
+const corrLabels = ['2020-S1','2020-S2','2021-S1','2021-S2','2022-S1','2022-S2','2023-S1','2023-S2','2024-S1','2024-S2','2025-S1','2025-S2'];
+const rainfallData = [6.2, 2.8, 5.1, 1.4, 7.8, 3.2, 6.5, 2.5, 5.8, 3.0, 6.9, 2.1];
+const priceData = [85, 210, 175, 583, 52, 165, 68, 195, 95, 180, 62, 250];
+
+const corrCtx = document.getElementById('correlationChart').getContext('2d');
+const correlationChart = new Chart(corrCtx, {
+  type: 'line',
+  data: {
+    labels: corrLabels,
+    datasets: [
+      {
+        label: 'Precipitação (mm/dia)',
+        data: rainfallData,
+        borderColor: '#64D8CB',
+        backgroundColor: 'rgba(100,216,203,.1)',
+        fill: true,
+        yAxisID: 'y',
+        tension: .4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2
+      },
+      {
+        label: 'PLD (R$/MWh)',
+        data: priceData,
+        borderColor: '#E6AA68',
+        backgroundColor: 'rgba(230,170,104,.1)',
+        fill: true,
+        yAxisID: 'y1',
+        tension: .4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20 } },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            if (ctx.datasetIndex === 0) return ctx.dataset.label + ': ' + ctx.parsed.y + ' mm/dia';
+            return ctx.dataset.label + ': R$' + ctx.parsed.y + '/MWh';
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        position: 'left',
+        title: { display: true, text: 'Precipitação (mm/dia)', color: '#64D8CB' },
+        grid: { color: '#1e242966' },
+        ticks: { color: '#64D8CB' }
+      },
+      y1: {
+        position: 'right',
+        title: { display: true, text: 'PLD (R$/MWh)', color: '#E6AA68' },
+        grid: { drawOnChartArea: false },
+        ticks: { color: '#E6AA68' }
+      }
+    }
+  }
+});
+
+// -- Chart 2: Drought bar chart (historical distribution) --
+const droughtCtx = document.getElementById('droughtChart').getContext('2d');
+const droughtChart = new Chart(droughtCtx, {
+  type: 'bar',
+  data: {
+    labels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
+    datasets: [{
+      label: 'PLD Médio Anual (R$/MWh)',
+      data: [205, 180, 148, 352, 108, 132, 138, 156],
+      backgroundColor: function(ctx) {
+        const v = ctx.raw;
+        if (v > 250) return 'rgba(212,114,106,.7)';
+        if (v > 160) return 'rgba(230,170,104,.7)';
+        return 'rgba(100,216,203,.7)';
+      },
+      borderColor: function(ctx) {
+        const v = ctx.raw;
+        if (v > 250) return '#D4726A';
+        if (v > 160) return '#E6AA68';
+        return '#64D8CB';
+      },
+      borderWidth: 1,
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) { return 'PLD: R$' + ctx.parsed.y + '/MWh'; }
+        }
+      }
+    },
+    scales: {
+      y: {
+        title: { display: true, text: 'PLD Médio (R$/MWh)' },
+        grid: { color: '#1e242966' },
+        beginAtZero: true
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// -- Chart 3: Prediction accuracy --
+const predLabels = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const actualPrices = [88, 72, 65, 78, 105, 138, 165, 195, 210, 175, 120, 82];
+const predictedPrices = [92, 78, 60, 82, 98, 145, 158, 188, 220, 168, 115, 88];
+const upperBound = [112, 98, 80, 102, 118, 165, 178, 208, 240, 188, 135, 108];
+const lowerBound = [72, 58, 40, 62, 78, 125, 138, 168, 200, 148, 95, 68];
+
+const predCtx = document.getElementById('predictionChart').getContext('2d');
+const predictionChart = new Chart(predCtx, {
+  type: 'line',
+  data: {
+    labels: predLabels,
+    datasets: [
+      {
+        label: 'Preço Real',
+        data: actualPrices,
+        borderColor: '#A8B8D8',
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        tension: .3
+      },
+      {
+        label: 'Previsão RainPower',
+        data: predictedPrices,
+        borderColor: '#13C2C2',
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        borderDash: [6, 3],
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        tension: .3
+      },
+      {
+        label: 'Intervalo de Confiança',
+        data: upperBound,
+        borderColor: 'transparent',
+        backgroundColor: 'rgba(19,194,194,.08)',
+        fill: '+1',
+        pointRadius: 0,
+        tension: .3
+      },
+      {
+        label: '',
+        data: lowerBound,
+        borderColor: 'transparent',
+        backgroundColor: 'rgba(19,194,194,.08)',
+        fill: false,
+        pointRadius: 0,
+        tension: .3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          padding: 20,
+          filter: function(item) { return item.text !== ''; }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            if (ctx.datasetIndex <= 1) return ctx.dataset.label + ': R$' + ctx.parsed.y + '/MWh';
+            return null;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        title: { display: true, text: 'PLD (R$/MWh)' },
+        grid: { color: '#1e242966' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// -- Update chart labels on language change --
+function updateChartLabels(lang) {
+  // Correlation chart
+  correlationChart.data.datasets[0].label = lang === 'pt' ? 'Precipitação (mm/dia)' : 'Rainfall (mm/day)';
+  correlationChart.data.datasets[1].label = lang === 'pt' ? 'PLD (R$/MWh)' : 'PLD (R$/MWh)';
+  correlationChart.options.scales.y.title.text = lang === 'pt' ? 'Precipitação (mm/dia)' : 'Rainfall (mm/day)';
+  correlationChart.options.scales.y1.title.text = 'PLD (R$/MWh)';
+  correlationChart.update();
+
+  // Drought chart
+  droughtChart.data.datasets[0].label = lang === 'pt' ? 'PLD Médio Anual (R$/MWh)' : 'Annual Avg PLD (R$/MWh)';
+  droughtChart.options.scales.y.title.text = lang === 'pt' ? 'PLD Médio (R$/MWh)' : 'Avg PLD (R$/MWh)';
+  droughtChart.update();
+
+  // Prediction chart
+  predictionChart.data.datasets[0].label = lang === 'pt' ? 'Preço Real' : 'Actual Price';
+  predictionChart.data.datasets[1].label = lang === 'pt' ? 'Previsão RainPower' : 'RainPower Forecast';
+  predictionChart.data.datasets[2].label = lang === 'pt' ? 'Intervalo de Confiança' : 'Confidence Interval';
+  const months_pt = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  const months_en = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  predictionChart.data.labels = lang === 'pt' ? months_pt : months_en;
+  predictionChart.options.scales.y.title.text = 'PLD (R$/MWh)';
+  predictionChart.update();
 }
 </script>
 </body>
