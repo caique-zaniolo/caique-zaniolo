@@ -1013,6 +1013,28 @@
     margin-bottom: 2px;
   }
 
+  /* ---- MOBILE ---- */
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    #main {
+      margin-left: 0;
+      max-width: 100%;
+    }
+    .cover { padding: 40px 28px 36px; }
+    .cover-title { font-size: 36px; }
+    .cover-subtitle { font-size: 16px; }
+    .cover-meta { flex-direction: column; gap: 12px; }
+    .section { padding: 36px 24px; }
+    .principles-grid { grid-template-columns: 1fr 1fr; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr 1fr; }
+    .headcount-visual { grid-template-columns: 1fr 1fr; }
+    .anatomy-grid { grid-template-columns: repeat(4, 1fr); }
+    .cheatsheet { grid-template-columns: 1fr; }
+    .glossary-grid { grid-template-columns: 1fr; }
+    .system-map, .lib-tree, .decision-tree, pre { font-size: 10px; }
+  }
+
   /* ---- PRINT ---- */
   @media print {
     :root { --sidebar-width: 0px; }
@@ -1173,7 +1195,7 @@
 
   <div class="sidebar-footer">
     Gravitas Energy &mdash; Confidential<br>
-    GravOS Version 1.0 &mdash; 2025
+    GravOS Version 1.0 &mdash; 2026
   </div>
 </nav>
 
