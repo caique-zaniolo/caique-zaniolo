@@ -35,7 +35,10 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
 
   body {
     font-family: var(--font-body);
@@ -45,6 +48,7 @@
     background: var(--gray-50);
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* ---- SIDEBAR ---- */
@@ -511,8 +515,10 @@
     font-size: 11.5px;
     color: rgba(255,255,255,0.7);
     line-height: 1.9;
-    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-word;
     overflow-x: auto;
+    max-width: 100%;
   }
 
   /* ---- CODE BLOCKS ---- */
@@ -526,7 +532,9 @@
     color: rgba(255,255,255,0.75);
     line-height: 1.8;
     overflow-x: auto;
+    max-width: 100%;
     white-space: pre-wrap;
+    word-break: break-word;
   }
 
   code {
@@ -741,7 +749,10 @@
     margin: 16px 0;
     color: var(--navy);
     line-height: 2;
-    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    max-width: 100%;
   }
 
   .lib-tree .dir { color: var(--navy-light); font-weight: 600; }
@@ -788,7 +799,6 @@
     background: var(--white);
   }
 
-  /* ---- DECISION TREE ---- */
   .decision-tree {
     background: var(--gray-50);
     border: 1px solid var(--gray-200);
@@ -797,8 +807,10 @@
     font-size: 11.5px;
     color: var(--navy);
     line-height: 2;
-    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-word;
     overflow-x: auto;
+    max-width: 100%;
     margin: 16px 0;
   }
 
@@ -1016,23 +1028,51 @@
   /* ---- MOBILE ---- */
   @media (max-width: 768px) {
     #sidebar { display: none; }
-    #main {
-      margin-left: 0;
-      max-width: 100%;
-    }
-    .cover { padding: 40px 28px 36px; }
-    .cover-title { font-size: 36px; }
-    .cover-subtitle { font-size: 16px; }
-    .cover-meta { flex-direction: column; gap: 12px; }
-    .section { padding: 36px 24px; }
-    .principles-grid { grid-template-columns: 1fr 1fr; }
+
+    #main { margin-left: 0; max-width: 100%; width: 100%; }
+
+    .cover { padding: 36px 20px 32px; }
+    .cover-logo svg { width: 140px; }
+    .cover-title { font-size: 32px; }
+    .cover-subtitle { font-size: 15px; }
+    .cover-meta { flex-direction: column; gap: 10px; }
+    .cover-belief p { font-size: 14px; }
+
+    .section { padding: 32px 20px; }
+    .section-title { font-size: 24px; }
+    .section-header-body { gap: 12px; }
+    .section-icon { width: 36px; height: 36px; }
+
+    .principles-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .modules-grid { grid-template-columns: 1fr; }
-    .roadmap-grid { grid-template-columns: 1fr 1fr; }
-    .headcount-visual { grid-template-columns: 1fr 1fr; }
-    .anatomy-grid { grid-template-columns: repeat(4, 1fr); }
+    .roadmap-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .headcount-visual { grid-template-columns: 1fr; }
     .cheatsheet { grid-template-columns: 1fr; }
     .glossary-grid { grid-template-columns: 1fr; }
-    .system-map, .lib-tree, .decision-tree, pre { font-size: 10px; }
+    .anatomy-grid { grid-template-columns: repeat(4, 1fr); }
+    .anatomy-cell { padding: 10px 6px; }
+    .anatomy-num { font-size: 18px; }
+    .anatomy-label { font-size: 8.5px; }
+    .anatomy-desc { font-size: 9.5px; }
+    .role-card { padding: 16px 14px; }
+    .target-box { grid-column: 1 / -1; }
+
+    .agent-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .agent-badges { flex-wrap: wrap; }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+    .table-wrap table { min-width: 0; width: 100%; }
+    .table-wrap table td, .table-wrap table th { word-break: break-word; }
+
+    .cheat-row { flex-direction: column; gap: 2px; }
+    .cheat-val { text-align: left; }
+  }
+
+  @media (max-width: 420px) {
+    .principles-grid { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .anatomy-grid { grid-template-columns: repeat(3, 1fr); }
+    .cover-title { font-size: 28px; }
   }
 
   /* ---- PRINT ---- */
@@ -2314,13 +2354,11 @@ Note: Invoice must NOT be issued if any check fails.</pre>
 </div><!-- /main -->
 
 <script>
-  // Navigation active state
   function navTo(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Update active nav item on scroll
   const sections = ['s0','s1','s2','s3','s4','s5','s6','s7','s8'];
   const navItems = document.querySelectorAll('.nav-item');
 
